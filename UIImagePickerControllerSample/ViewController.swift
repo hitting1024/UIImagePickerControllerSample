@@ -24,6 +24,15 @@ class ViewController: UIViewController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.showsCameraControls = false
+        
+        // full screen camera
+        let screenSize = UIScreen.main.bounds.size
+        let cameraAspectRatio = CGFloat(4.0 / 3.0)
+        let cameraImageHeight = screenSize.width * cameraAspectRatio
+        let scale = screenSize.height / cameraImageHeight
+        imagePickerController.cameraViewTransform = CGAffineTransform(translationX: 0, y: (screenSize.height - cameraImageHeight)/2)
+        imagePickerController.cameraViewTransform = imagePickerController.cameraViewTransform.scaledBy(x: scale, y: scale)
+        
         self.present(imagePickerController, animated: false, completion: nil)
     }
 
